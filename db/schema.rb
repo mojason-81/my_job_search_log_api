@@ -10,14 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_225754) do
-  create_table "contacts", force: :cascade do |t|
-    t.date "contacted_on"
-    t.string "company"
-    t.string "contact_point"
-    t.string "contact_type"
-    t.datetime "follow_up_on"
-    t.datetime "meet_on"
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_182450) do
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.date "contacted_on"
+    t.string "contact_point"
+    t.string "contact_type"
+    t.date "follow_up_on"
+    t.date "meet_on"
+    t.integer "company_id"
+    t.index ["company_id"], name: "index_contacts_on_company_id"
+  end
+
+  add_foreign_key "contacts", "companies"
 end

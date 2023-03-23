@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
-    render json: @contacts
+    @contacts = Contact.all.includes(:company)
+    render json: @contacts, include: [:company]
   end
 
   def show
@@ -9,6 +9,8 @@ class ContactsController < ApplicationController
   end
 
   def create
+    # FIXME: Need to accept nested attributes for company
+    #        name and url
     Contact.create!(contact_params)
     render :ok
   end
@@ -25,14 +27,19 @@ class ContactsController < ApplicationController
   end
 
   def contact_params
-    params.permit(
+    params.require(:contact).permit(
       :id,
       :company,
       :contact_point,
       :contacted_on,
       :follow_up_on,
       :meet_on,
-      :contact_type
+      :contact_type,
+      company_attributes: [
+        :id,
+        :name,
+        :url
+      ]
     )
   end
 end
