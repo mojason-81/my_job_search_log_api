@@ -1,24 +1,24 @@
-# README
+## My Job Search Log API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails API backend to support tracking of contacts for employment opportunities.
 
-Things you may want to cover:
+Used by [my-job-search-log-ui](https://github.com/mojason-81/my-job-search-log-ui)
 
-* Ruby version
+- Ruby 3.2.1
+- Rails 7.0
 
-* System dependencies
+- Database creation
 
-* Configuration
+  - `bundle exec rails db:create`
 
-* Database creation
+- Database initialization
 
-* Database initialization
+  - `bundle exec rails db:migrate`
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+  - Pending tests.....
 
-* Deployment instructions
-
-* ...
+- Deployment instructions
+  - No deployment plans at present
+  - `bundle exec rails s`
