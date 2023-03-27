@@ -7,6 +7,10 @@ Used by [my-job-search-log-ui](https://github.com/mojason-81/my-job-search-log-u
 - Ruby 3.2.1
 - Rails 7.0
 
+- Install dependencies
+
+  - `bundle install`
+
 - Database creation
 
   - `bundle exec rails db:create`
