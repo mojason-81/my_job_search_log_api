@@ -7,17 +7,17 @@ class ContactsController < ApplicationController
 
   # NOTE: Maybe I don't need the show route...
   def show
-    render json: Contact.find(find_contact_params[:id])
+    render json: Contact.includes(:company).find(find_contact_params[:id]), include: [:company]
   end
 
   def create
-    ContactCreatorService.new(contact_attrs: contact_params, company_attrs: company_params).create
+    ContactCreatorService.new(contact_attrs: create_contact_params, company_attrs: company_params).create
     render :ok
   end
 
   # NOTE: Maybe I don't need the update route....
   def update
-    Contact.update!(contact_params)
+    Contact.find(find_contact_params[:id]).update!(update_contact_params)
     render :ok
   end
 
@@ -33,10 +33,19 @@ class ContactsController < ApplicationController
     params.permit(:id)
   end
 
-  def contact_params
+  def create_contact_params
     params.require(:contact).permit(
-      :id,
       :company,
+      :contact_point,
+      :contacted_on,
+      :follow_up_on,
+      :meet_on,
+      :contact_type,
+    )
+  end
+
+  def update_contact_params
+    params.require(:contact).permit(
       :contact_point,
       :contacted_on,
       :follow_up_on,
