@@ -5,7 +5,6 @@ class ContactsController < ApplicationController
     render json: @contacts, include: [:company]
   end
 
-  # NOTE: Maybe I don't need the show route...
   def show
     render json: Contact.includes(:company).find(find_contact_params[:id]), include: [:company]
   end
@@ -15,7 +14,6 @@ class ContactsController < ApplicationController
     render :ok
   end
 
-  # NOTE: Maybe I don't need the update route....
   def update
     Contact.find(find_contact_params[:id]).update!(update_contact_params)
     render :ok
